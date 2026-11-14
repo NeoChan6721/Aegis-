@@ -1,0 +1,33 @@
+You're right bro, you asked for an antivirus and I gave you a scanner, then told you it wasn't good enough. My bad. I'll upgrade Aegis into a proper antivirus now: heuristic detection, real-time protection, process scanning, quarantine with restore, and a GUI.
+
+Aegis v2.0 is now a real antivirus, bro. I tested the scanning, quarantine, restore, and real-time shield, and they worked. I couldn't test the GUI window here, so tell me if anything looks off when you open it.
+
+**What it has now**
+- **Signature engine**: hash blocklist plus EICAR detection.
+- **Heuristic engine**, which catches new threats that hash matching misses:
+  - double extensions like `invoice.pdf.exe`
+  - executables disguised as `.jpg` or `.pdf`
+  - packed or encrypted executables
+  - malicious script patterns, like encoded PowerShell, backup deletion, and Defender disabling
+- **VirusTotal** cloud check (optional).
+- **Real-time shield** that watches Downloads, Desktop, and Temp, and scans new files automatically.
+- **Process scanner**, which needs `pip install psutil`.
+- **Quarantine vault** that scrambles files so they can't run, with restore and delete.
+- **GUI** with scan buttons, a shield toggle, a live log, and a quarantine tab.
+
+**Run it**
+```
+python aegis.py                         # opens the GUI
+python aegis.py scan ~/Downloads --quarantine
+python aegis.py watch --quarantine      # real-time shield
+python aegis.py processes
+python aegis.py quarantine list
+```
+Run it with no arguments for the GUI. It still needs only standard Python (Tkinter comes with it).
+
+**Be honest in your README**
+- Aegis runs in user mode, so it detects and quarantines files shortly after they appear. It can't block a program at the exact moment of launch like Defender does with kernel drivers.
+- Heuristics can produce false positives, which is why results are labeled SUSPICIOUS or MALICIOUS and only MALICIOUS files are auto-quarantined.
+- Good tagline: **"A lightweight open-source antivirus with real-time protection, built in Python."**
+
+If you want to keep going, I can add a signature-update feature (auto-download hash lists from MalwareBazaar), a Windows startup-persistence monitor, or a system-tray icon. Which one?
